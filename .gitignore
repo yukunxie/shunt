@@ -1,3 +1,6 @@
 *.meta
 *.metadata
+/Library/metadata/*
+/Temp/*
+metadata
 *.[oa]
