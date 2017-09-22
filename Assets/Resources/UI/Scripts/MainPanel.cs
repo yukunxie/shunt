@@ -15,7 +15,7 @@ public class MainPanel : MonoBehaviour {
 	void Start () {
 		Button btn = transform.Find ("enterSceneBtn").GetComponent<Button>();
 		btn.onClick.AddListener (onEnterScenBtn);
-		SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+		//SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,9 @@ public class MainPanel : MonoBehaviour {
 
 	private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
 	{
-		var prefab = Resources.Load ("Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController", typeof(GameObject));
+        SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
+
+        var prefab = Resources.Load ("Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController", typeof(GameObject));
 		GameObject instance = Instantiate(prefab, new Vector3 (250, 0, 249), Quaternion.identity) as GameObject;
 
 		Camera.main.gameObject.AddComponent<SmoothFollow> ();
@@ -44,8 +46,10 @@ public class MainPanel : MonoBehaviour {
 
 	public void onEnterScenBtn()
 	{
-		StartCoroutine(load ());
-	}
+        //StartCoroutine(load ());
+        LoadingScenePanel.show("");
+
+    }
 
 	private IEnumerator load()
 	{
